@@ -1,0 +1,9 @@
+{
+	"name": "prasannapractice",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "049748e8-6965-4315-9d56-48ad29a22cc9",
+		"tenantId": "89afa49e-3472-44ef-aea2-037f8f70bd6f"
+	}
+}
