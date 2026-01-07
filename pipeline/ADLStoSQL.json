@@ -1,0 +1,227 @@
+{
+	"name": "ADLStoSQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"Timestamp",
+								"Name of the Student"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Timestamp",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Name of the Student",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Name of the Student",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Year",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Name of the College",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Name of the College",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Place",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Place",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Academic Performance (% In Latest Exam)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Academic Performance (% In Latest Exam)",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Have you attended workshop for students conducted by VSM?",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Have you attended workshop for students conducted by VSM?",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "What were your takeaway/s from this Workshop?",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "What were your takeaway/s from this Workshop?",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Have you attended any other Shibir/Monthly meeting of VSM?",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Have you attended any other Shibir/Monthly meeting of VSM?",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Do you attend the Online Academic Activities of VSM?",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Do you attend the Online Academic Activities of VSM?",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Have you participated in any college events/Workshops?If yes, give details.",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Have you participated in any college events/Workshops?If yes, give details.",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Any extracurricular activity of students ",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Any extracurricular activity of students ",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Remarks, if any by KP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Remarks, if any by KP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CSR_Fund_new",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
